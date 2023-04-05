@@ -4,7 +4,7 @@ export const Container = styled.article`
   display: flex;
   flex-direction: column;
 
-  flex: 1 300px;
+  flex: 1 350px;
 
   border-radius: 10px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
@@ -13,12 +13,21 @@ export const Container = styled.article`
 export const CardHeader = styled.header``;
 
 export const ProductImage = styled.img`
-  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  width: 300px;
+  height: 400px;
+  object-fit: contain;
   padding: 2rem;
 `;
 
 export const CardMain = styled.main`
   padding: 0rem 2rem 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
 `;
 
 export const ProductTitle = styled.h2`
@@ -30,6 +39,7 @@ export const ProductTitle = styled.h2`
 export const PriceReviewWrapper = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin-bottom: 1rem;
 `;
 

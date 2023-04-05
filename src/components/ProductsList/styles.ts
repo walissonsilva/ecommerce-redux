@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.section`
   display: flex;
-  align-items: center;
+  align-items: stretch;
   gap: 3rem;
 
   max-width: 1240px;

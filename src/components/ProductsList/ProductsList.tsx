@@ -1,20 +1,15 @@
 import React from "react";
+import { ProductCard } from "../ProductCard/ProductCard";
+import { products } from "../../data/products";
 
 import * as S from "./styles";
-import { ProductCard } from "../ProductCard/ProductCard";
 
 export const ProductsList: React.FC = () => {
   return (
     <S.Container>
-      <ProductCard />
-      <ProductCard />
-      <ProductCard />
-      <ProductCard />
-
-      <ProductCard />
-      <ProductCard />
-      <ProductCard />
-      <ProductCard />
+      {products.map((product) => (
+        <ProductCard key={product.id} product={product} />
+      ))}
     </S.Container>
   );
 };
