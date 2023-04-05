@@ -1,9 +1,11 @@
 import React from "react";
-import { FiLogIn, FiShoppingCart } from "react-icons/fi";
+import { FiLogIn, FiLogOut, FiShoppingCart } from "react-icons/fi";
 
 import * as S from "./styles";
 
 export const Header: React.FC = () => {
+  const isLogged = true;
+
   return (
     <S.Container>
       <S.Navbar>
@@ -13,10 +15,17 @@ export const Header: React.FC = () => {
 
         <S.NavbarActionsList>
           <S.ActionItem>
-            <S.LoginButton>
-              Login
-              <FiLogIn />
-            </S.LoginButton>
+            {!isLogged ? (
+              <S.LoginButton>
+                Login
+                <FiLogIn />
+              </S.LoginButton>
+            ) : (
+              <S.LogoutButton>
+                Logout
+                <FiLogOut />
+              </S.LogoutButton>
+            )}
           </S.ActionItem>
 
           <S.ActionItem>

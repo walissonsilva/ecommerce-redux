@@ -7,7 +7,7 @@ export const Container = styled.header`
   color: white;
 
   span {
-    color: pink;
+    color: violet;
   }
 `;
 
@@ -56,6 +56,25 @@ export const LoginButton = styled.button`
   }
 `;
 
+export const LogoutButton = styled.button`
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+  height: 40px;
+  padding: 0 2rem;
+
+  background-color: tomato;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  transition: filter 0.3s;
+
+  &:hover {
+    filter: brightness(1.2);
+    transition: filter 0.3s;
+  }
+`;
+
 export const CartButton = styled.button`
   display: flex;
   gap: 0.4rem;
@@ -63,7 +82,7 @@ export const CartButton = styled.button`
   height: 40px;
   padding: 0 2rem;
 
-  background-color: pink;
+  background-color: violet;
   border: none;
   border-radius: 5px;
   transition: filter 0.3s;
