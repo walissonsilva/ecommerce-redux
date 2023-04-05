@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { FiLogIn, FiLogOut, FiShoppingCart } from "react-icons/fi";
 
 import * as S from "./styles";
+import { Cart } from "../Cart/Cart";
 
 export const Header: React.FC = () => {
   const isLogged = true;
+  const [showCart, setShowCart] = useState(false);
 
   return (
     <S.Container>
@@ -29,13 +31,15 @@ export const Header: React.FC = () => {
           </S.ActionItem>
 
           <S.ActionItem>
-            <S.CartButton>
+            <S.CartButton onClick={() => setShowCart(!showCart)}>
               Carrinho
               <FiShoppingCart />
             </S.CartButton>
           </S.ActionItem>
         </S.NavbarActionsList>
       </S.Navbar>
+
+      <Cart show={showCart} />
     </S.Container>
   );
 };

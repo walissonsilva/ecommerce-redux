@@ -7,6 +7,11 @@ export const GlobalStyles = createGlobalStyle`
     box-sizing: border-box;
   }
 
+  body {
+    max-width: 100vw;
+    overflow: hidden;
+  }
+
   body, button, input, select, option, textarea {
     font-family: 'Poppins', sans-serif;
   }
