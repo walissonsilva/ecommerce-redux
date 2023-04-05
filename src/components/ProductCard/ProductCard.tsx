@@ -27,7 +27,8 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
               ) : (
                 <AiOutlineStar />
               )
-            )}
+            )}{" "}
+            <span>({product.rating.rate})</span>
           </S.ProductReview>
           <S.ProductPrice>${product.price}</S.ProductPrice>
         </S.PriceReviewWrapper>

@@ -9,7 +9,8 @@ export const GlobalStyles = createGlobalStyle`
 
   body {
     max-width: 100vw;
-    overflow: hidden;
+    overflow-x: hidden;
+    background-color: #f7f7f7;
   }
 
   body, button, input, select, option, textarea {

@@ -8,6 +8,7 @@ export const Container = styled.article`
 
   border-radius: 10px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
+  background-color: white;
 `;
 
 export const CardHeader = styled.header``;
@@ -43,7 +44,15 @@ export const PriceReviewWrapper = styled.div`
   margin-bottom: 1rem;
 `;
 
-export const ProductReview = styled.div``;
+export const ProductReview = styled.div`
+  display: flex;
+  align-items: center;
+
+  span {
+    font-size: 0.8rem;
+    margin-left: 0.4rem;
+  }
+`;
 
 export const ProductPrice = styled.span`
   font-weight: 600;
