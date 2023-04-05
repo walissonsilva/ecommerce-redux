@@ -48,6 +48,12 @@ export const LoginButton = styled.button`
   color: white;
   border: none;
   border-radius: 5px;
+  transition: filter 0.3s;
+
+  &:hover {
+    filter: brightness(1.2);
+    transition: filter 0.3s;
+  }
 `;
 
 export const CartButton = styled.button`
@@ -60,4 +66,10 @@ export const CartButton = styled.button`
   background-color: pink;
   border: none;
   border-radius: 5px;
+  transition: filter 0.3s;
+
+  &:hover {
+    filter: brightness(1.2);
+    transition: filter 0.3s;
+  }
 `;
