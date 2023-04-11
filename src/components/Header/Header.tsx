@@ -1,12 +1,27 @@
 import React, { useState } from "react";
 import { FiLogIn, FiLogOut, FiShoppingCart } from "react-icons/fi";
 
-import * as S from "./styles";
+import { useDispatch, useSelector } from "react-redux";
+import { UserActions } from "../../redux/user/reducer";
 import { Cart } from "../Cart/Cart";
+import * as S from "./styles";
+import { RootState } from "../../redux/root-reducer";
 
 export const Header: React.FC = () => {
-  const isLogged = true;
   const [showCart, setShowCart] = useState(false);
+
+  const { currentUser } = useSelector(
+    (rootReducer: RootState) => rootReducer.userReducer
+  );
+  const dispatch = useDispatch();
+
+  function handleLoginClick() {
+    dispatch({ type: UserActions.LOGIN });
+  }
+
+  function handleLogoutClick() {
+    dispatch({ type: UserActions.LOGOUT });
+  }
 
   return (
     <S.Container>
@@ -17,13 +32,13 @@ export const Header: React.FC = () => {
 
         <S.NavbarActionsList>
           <S.ActionItem>
-            {!isLogged ? (
-              <S.LoginButton>
+            {!currentUser ? (
+              <S.LoginButton onClick={handleLoginClick}>
                 Login
                 <FiLogIn />
               </S.LoginButton>
             ) : (
-              <S.LogoutButton>
+              <S.LogoutButton onClick={handleLogoutClick}>
                 Logout
                 <FiLogOut />
               </S.LogoutButton>
