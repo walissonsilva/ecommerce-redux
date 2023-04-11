@@ -59,7 +59,8 @@ export const ProductPrice = styled.span`
   font-size: 1.4rem;
 `;
 
-export const AddToCardButton = styled.button`
+type AddToCardButtonProps = { isOnCart: boolean };
+export const AddToCardButton = styled.button<AddToCardButtonProps>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -69,8 +70,8 @@ export const AddToCardButton = styled.button`
   padding: 0 2rem;
   width: 100%;
 
-  background-color: navy;
-  color: white;
+  background-color: ${(props) => (props.isOnCart ? "violet" : "navy")};
+  color: ${(props) => (props.isOnCart ? "black" : "white")};
   border: none;
   border-radius: 5px;
   transition: filter 0.3s;

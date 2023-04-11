@@ -4,12 +4,21 @@ import { AiOutlineStar, AiFillStar } from "react-icons/ai";
 
 import * as S from "./styles";
 import { Product } from "../../types/Product";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../redux/root-reducer";
 
 interface ProductCardProps {
   product: Product;
 }
 
 export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+  const { cart } = useSelector(
+    (rootReducer: RootState) => rootReducer.cartReducer
+  );
+  const dispatch = useDispatch();
+
+  const isOnCart = cart.find((cartProduct) => cartProduct.id === product.id);
+
   return (
     <S.Container>
       <S.CardHeader>
@@ -33,8 +42,16 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           <S.ProductPrice>${product.price}</S.ProductPrice>
         </S.PriceReviewWrapper>
 
-        <S.AddToCardButton>
-          Adicionar ao carrinho
+        <S.AddToCardButton
+          isOnCart={Boolean(isOnCart)}
+          onClick={() =>
+            dispatch({
+              type: isOnCart ? "cart/remove-product" : "cart/add-product",
+              payload: product,
+            })
+          }
+        >
+          {!isOnCart ? "Adicionar ao carrinho" : "Remover do carrinho"}
           <FiShoppingCart />
         </S.AddToCardButton>
       </S.CardMain>
