@@ -1,94 +1,65 @@
 import styled from "styled-components";
 
-export const Container = styled.header`
-  display: flex;
-
+export const StyledHeader = styled.header`
   background-color: navy;
-  color: white;
-
-  span {
-    color: violet;
-  }
 `;
 
-export const Brand = styled.h1`
-  font-size: 2rem;
+export const Wrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  height: 60px;
+`;
+
+export const HeaderTitle = styled.h1`
+  color: white;
+  font-size: 1.6rem;
   font-weight: 500;
 `;
 
-export const Navbar = styled.nav`
-  width: 100%;
-  padding: 0 2rem;
-  max-width: 1240px;
-  margin: 0 auto;
-
-  height: 80px;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-`;
-
-export const NavbarActionsList = styled.ul`
-  list-style: none;
+export const ButtonsWrapper = styled.div`
   display: flex;
   gap: 1rem;
 `;
 
-export const ActionItem = styled.li``;
-
-export const LoginButton = styled.button`
-  display: flex;
-  gap: 0.4rem;
-  align-items: center;
-  height: 40px;
-  padding: 0 2rem;
-
-  background-color: green;
-  color: white;
+interface AuthButtonProps {
+  isLogged: boolean;
+}
+export const AuthButton = styled.button<AuthButtonProps>`
   border: none;
   border-radius: 5px;
-  transition: filter 0.3s;
-
-  &:hover {
-    filter: brightness(1.2);
-    transition: filter 0.3s;
-  }
-`;
-
-export const LogoutButton = styled.button`
-  display: flex;
-  gap: 0.4rem;
-  align-items: center;
-  height: 40px;
-  padding: 0 2rem;
-
-  background-color: tomato;
+  height: 30px;
+  padding: 0 1rem;
+  background-color: ${(props) => (props.isLogged ? "red" : "green")};
   color: white;
-  border: none;
-  border-radius: 5px;
-  transition: filter 0.3s;
+  font-size: 0.75rem;
 
-  &:hover {
-    filter: brightness(1.2);
-    transition: filter 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+
+  svg {
+    font-size: 0.7rem;
   }
 `;
 
 export const CartButton = styled.button`
-  display: flex;
-  gap: 0.4rem;
-  align-items: center;
-  height: 40px;
-  padding: 0 2rem;
-
-  background-color: violet;
   border: none;
   border-radius: 5px;
-  transition: filter 0.3s;
+  height: 30px;
+  padding: 0 1rem;
+  background-color: violet;
+  color: black;
 
-  &:hover {
-    filter: brightness(1.2);
-    transition: filter 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+
+  svg {
+    font-size: 0.7rem;
   }
 `;

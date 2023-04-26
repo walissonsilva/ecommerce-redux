@@ -1,60 +1,61 @@
-import React, { useState } from "react";
-import { FiLogIn, FiLogOut, FiShoppingCart } from "react-icons/fi";
-
+import { Dispatch, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { UserActions } from "../../redux/user/reducer";
 import { Cart } from "../Cart/Cart";
+import { FiLogIn, FiLogOut, FiShoppingCart } from "react-icons/fi";
+import { RootReducer } from "../../redux/rootReducer";
+import { UserDispatchAction } from "../../redux/UserReducer/userReducer";
+
 import * as S from "./styles";
-import { RootState } from "../../redux/root-reducer";
 
 export const Header: React.FC = () => {
   const [showCart, setShowCart] = useState(false);
-
-  const { currentUser } = useSelector(
-    (rootReducer: RootState) => rootReducer.userReducer
+  const { user } = useSelector(
+    (rootReducer: RootReducer) => rootReducer.userReducer
   );
-  const dispatch = useDispatch();
+  const { cart } = useSelector(
+    (rootReducer: RootReducer) => rootReducer.cartReducer
+  );
+  const dispatch: Dispatch<UserDispatchAction> = useDispatch();
 
-  function handleLoginClick() {
-    dispatch({ type: UserActions.LOGIN });
-  }
+  const isLogged = user !== null;
 
-  function handleLogoutClick() {
-    dispatch({ type: UserActions.LOGOUT });
+  function handleClickOnLoginButton() {
+    if (!user) {
+      // dispatch para logar o usuário
+      dispatch({
+        type: "user/login",
+        payload: {
+          id: "1",
+          name: "Walisson Silva",
+          email: "walisson@email.com",
+          picture: "",
+        },
+      });
+    } else {
+      // dispatch para deslogar o usuário
+      dispatch({ type: "user/logout" });
+    }
   }
 
   return (
-    <S.Container>
-      <S.Navbar>
-        <S.Brand>
-          MyShop<span>.</span>
-        </S.Brand>
+    <S.StyledHeader>
+      <S.Wrapper>
+        <S.HeaderTitle>MyShop.</S.HeaderTitle>
 
-        <S.NavbarActionsList>
-          <S.ActionItem>
-            {!currentUser ? (
-              <S.LoginButton onClick={handleLoginClick}>
-                Login
-                <FiLogIn />
-              </S.LoginButton>
-            ) : (
-              <S.LogoutButton onClick={handleLogoutClick}>
-                Logout
-                <FiLogOut />
-              </S.LogoutButton>
-            )}
-          </S.ActionItem>
+        <S.ButtonsWrapper>
+          <S.AuthButton isLogged={isLogged} onClick={handleClickOnLoginButton}>
+            {isLogged ? "Logout" : "Login"}
+            {isLogged ? <FiLogOut /> : <FiLogIn />}
+          </S.AuthButton>
 
-          <S.ActionItem>
-            <S.CartButton onClick={() => setShowCart(!showCart)}>
-              Carrinho
-              <FiShoppingCart />
-            </S.CartButton>
-          </S.ActionItem>
-        </S.NavbarActionsList>
-      </S.Navbar>
+          <S.CartButton onClick={() => setShowCart(!showCart)}>
+            Carrinho
+            <FiShoppingCart />
+          </S.CartButton>
+        </S.ButtonsWrapper>
+      </S.Wrapper>
 
-      <Cart show={showCart} />
-    </S.Container>
+      <Cart showCart={showCart} products={cart} />
+    </S.StyledHeader>
   );
 };

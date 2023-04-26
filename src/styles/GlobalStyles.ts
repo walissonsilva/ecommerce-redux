@@ -1,3 +1,5 @@
+// CSS in JS
+
 import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyles = createGlobalStyle`
@@ -8,16 +10,10 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   body {
-    max-width: 100vw;
-    overflow-x: hidden;
     background-color: #f7f7f7;
   }
 
-  body, button, input, select, option, textarea {
+  body, button, input {
     font-family: 'Poppins', sans-serif;
-  }
-
-  button {
-    cursor: pointer;
   }
 `;

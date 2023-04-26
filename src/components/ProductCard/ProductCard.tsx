@@ -1,11 +1,12 @@
-import React from "react";
+import { Dispatch } from "redux";
 import { FiShoppingCart } from "react-icons/fi";
-import { AiOutlineStar, AiFillStar } from "react-icons/ai";
+import { AiFillStar, AiOutlineStar } from "react-icons/ai";
+import { Product } from "../../data/products";
+import { useDispatch, useSelector } from "react-redux";
+import { RootReducer } from "../../redux/rootReducer";
+import { CartAction } from "../../redux/CartReducer/cart-reducer";
 
 import * as S from "./styles";
-import { Product } from "../../types/Product";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../redux/root-reducer";
 
 interface ProductCardProps {
   product: Product;
@@ -13,48 +14,55 @@ interface ProductCardProps {
 
 export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const { cart } = useSelector(
-    (rootReducer: RootState) => rootReducer.cartReducer
+    (rootReducer: RootReducer) => rootReducer.cartReducer
   );
-  const dispatch = useDispatch();
+  const dispatch: Dispatch<CartAction> = useDispatch();
 
-  const isOnCart = cart.find((cartProduct) => cartProduct.id === product.id);
+  const isOnCart =
+    cart.findIndex((cartProduct) => cartProduct.id === product.id) !== -1;
 
   return (
-    <S.Container>
-      <S.CardHeader>
-        <S.ProductImage src={product.image} alt={product.description} />
-      </S.CardHeader>
+    <S.Card>
+      <S.ProductImage src={product.image} alt={product.description} />
 
-      <S.CardMain>
-        <S.ProductTitle>{product.title}</S.ProductTitle>
+      <S.ProductTitle>{product.title}</S.ProductTitle>
 
-        <S.PriceReviewWrapper>
-          <S.ProductReview>
-            {Array.from({ length: 5 }).map((_, index) =>
-              index < Math.round(product.rating.rate) ? (
-                <AiFillStar key={index} />
-              ) : (
-                <AiOutlineStar key={index} />
-              )
-            )}{" "}
-            <span>({product.rating.rate})</span>
-          </S.ProductReview>
-          <S.ProductPrice>${product.price}</S.ProductPrice>
-        </S.PriceReviewWrapper>
+      <S.ReviewPriceContainer>
+        <S.Review>
+          {Array.from({ length: 5 }).map((_, index) =>
+            index < Math.round(product.rating.rate) ? (
+              <AiFillStar key={index} />
+            ) : (
+              <AiOutlineStar key={index} />
+            )
+          )}
+          ({` ${product.rating.rate}`})
+        </S.Review>
 
-        <S.AddToCardButton
-          isOnCart={Boolean(isOnCart)}
-          onClick={() =>
-            dispatch({
-              type: isOnCart ? "cart/remove-product" : "cart/add-product",
-              payload: product,
-            })
-          }
-        >
-          {!isOnCart ? "Adicionar ao carrinho" : "Remover do carrinho"}
-          <FiShoppingCart />
-        </S.AddToCardButton>
-      </S.CardMain>
-    </S.Container>
+        <S.Price>${product.price}</S.Price>
+      </S.ReviewPriceContainer>
+
+      <S.AddToCartButtonWrapper>
+        {!isOnCart ? (
+          <S.AddToCartButton
+            onClick={() =>
+              dispatch({ type: "cart/add-product", payload: product })
+            }
+          >
+            Adicionar ao carrinho
+            <FiShoppingCart />
+          </S.AddToCartButton>
+        ) : (
+          <S.RemoveFromCartButton
+            onClick={() =>
+              dispatch({ type: "cart/remove-product", payload: product })
+            }
+          >
+            Remover do carrinho
+            <FiShoppingCart />
+          </S.RemoveFromCartButton>
+        )}
+      </S.AddToCartButtonWrapper>
+    </S.Card>
   );
 };
