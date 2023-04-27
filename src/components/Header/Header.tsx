@@ -6,6 +6,7 @@ import { RootReducer } from "../../redux/rootReducer";
 import { UserDispatchAction } from "../../redux/UserReducer/userReducer";
 
 import * as S from "./styles";
+import { login, logout } from "../../redux/UserReducer/slice";
 
 export const Header: React.FC = () => {
   const [showCart, setShowCart] = useState(false);
@@ -22,18 +23,17 @@ export const Header: React.FC = () => {
   function handleClickOnLoginButton() {
     if (!user) {
       // dispatch para logar o usuário
-      dispatch({
-        type: "user/login",
-        payload: {
+      dispatch(
+        login({
           id: "1",
           name: "Walisson Silva",
           email: "walisson@email.com",
           picture: "",
-        },
-      });
+        })
+      );
     } else {
       // dispatch para deslogar o usuário
-      dispatch({ type: "user/logout" });
+      dispatch(logout({}));
     }
   }
 

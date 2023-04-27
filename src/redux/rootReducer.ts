@@ -1,7 +1,10 @@
 import { combineReducers } from "redux";
-import { userReducer } from "./UserReducer/userReducer";
-import { cartReducer } from "./CartReducer/cart-reducer";
+import { cartSlice } from "./CartReducer/slice";
+import { userSlice } from "./UserReducer/slice";
 
-export const rootReducer = combineReducers({ userReducer, cartReducer });
+export const rootReducer = combineReducers({
+  userReducer: userSlice.reducer,
+  cartReducer: cartSlice.reducer,
+});
 
 export type RootReducer = ReturnType<typeof rootReducer>;

@@ -7,6 +7,7 @@ import { RootReducer } from "../../redux/rootReducer";
 import { CartAction } from "../../redux/CartReducer/cart-reducer";
 
 import * as S from "./styles";
+import { addProduct, removeProduct } from "../../redux/CartReducer/slice";
 
 interface ProductCardProps {
   product: Product;
@@ -44,19 +45,13 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
       <S.AddToCartButtonWrapper>
         {!isOnCart ? (
-          <S.AddToCartButton
-            onClick={() =>
-              dispatch({ type: "cart/add-product", payload: product })
-            }
-          >
+          <S.AddToCartButton onClick={() => dispatch(addProduct(product))}>
             Adicionar ao carrinho
             <FiShoppingCart />
           </S.AddToCartButton>
         ) : (
           <S.RemoveFromCartButton
-            onClick={() =>
-              dispatch({ type: "cart/remove-product", payload: product })
-            }
+            onClick={() => dispatch(removeProduct(product))}
           >
             Remover do carrinho
             <FiShoppingCart />
